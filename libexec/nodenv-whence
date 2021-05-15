@@ -8,7 +8,7 @@ set -e
 # Provide nodenv completions
 if [ "$1" = "--complete" ]; then
   echo --path
-  exec nodenv shims --short
+  exec nodenv-shims --short
 fi
 
 if [ "$1" = "--path" ]; then
@@ -20,7 +20,7 @@ fi
 
 whence() {
   local command="$1"
-  nodenv-versions --bare | while read version; do
+  nodenv-versions --bare | while read -r version; do
     path="$(nodenv-prefix "$version")/bin/${command}"
     if [ -x "$path" ]; then
       [ "$print_paths" ] && echo "$path" || echo "$version"
